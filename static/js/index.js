@@ -12,11 +12,8 @@ const profilePicture = document.getElementById("profilePicture");
 window.addEventListener('load', function() {
     setTimeout(function() {
         document.getElementById('overlay').classList.add('hidden');
-    }, 1000); // 2 seconds
+    }, 100); // 
 });
-
-
-
 
 // Function to set dark mode icons
 const setIcons = (isDarkMode) => {
@@ -45,64 +42,6 @@ if (localStorage.getItem("dark-mode") === "enabled") {
     setIcons(false);
 }
 
-// Function to load a subject
-function loadSubject(subject) {
-    menu.style.display = "none";
-    backButton.style.display = "block";
-    spinner.style.display = "block";
-
-    loadSubjectContent(subject);
-}
-
-// Function to dynamically load the subject script
-function loadSubjectContent(subject) {
-    content.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = `static/subjects/${subject}.js`;
-    script.onload = () => {
-        spinner.style.display = "none";
-
-        if (typeof showSubjectContent === "function") {
-            showSubjectContent(content);
-        } else {
-            content.innerHTML = `<p>Error loading subject content.</p>`;
-        }
-    };
-    script.onerror = () => {
-        spinner.style.display = "none";
-        content.innerHTML = `<p>Error loading subject content.</p>`;
-    };
-    document.body.appendChild(script);
-}
-
-// Function to show the main menu
-function showMenu() {
-    content.innerHTML = `<p>Select a subject to get started.</p>`;
-    menu.style.display = "flex";
-    backButton.style.display = "none";
-    spinner.style.display = "none";
-
-    const subjectScripts = document.querySelectorAll(
-        'script[src^="static/subjects/"]',
-    );
-    subjectScripts.forEach((script) => script.remove());
-}
-
-// Function to scroll to the top
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// Show scroll to top button when scrolling
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
-        scrollToTopButton.style.display = "block";
-    } else {
-        scrollToTopButton.style.display = "none";
-    }
-});
-
 // Toggle sidebar visibility
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
@@ -112,7 +51,6 @@ function toggleSidebar() {
         sidebar.style.left = '0';
     }
 }
-
 
 // Logout function
 function logout() {
@@ -130,7 +68,6 @@ function logout() {
         });
 }
 
-// Fetch user info and set profile picture
 // Fetch user info and set profile picture
 fetch("/user")
     .then((response) => response.json())
@@ -222,9 +159,6 @@ function setupNameEditing() {
         }
     });
 }
-
-
-
 
 // Handle profile picture upload
 function uploadProfilePicture(event) {

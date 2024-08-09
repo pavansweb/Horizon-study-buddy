@@ -1,5 +1,5 @@
 hidden=[".config"]
-modules = ["web", "nodejs-20", "python-3.12"]
+modules = ["web", "python-3.12", "docker"]
 run = "python app.py"
 
 [nix]
@@ -12,4 +12,9 @@ run = ["sh", "-c", "python app.py"]
 
 [[ports]]
 localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
 externalPort = 80
+exposeLocalhost = true

@@ -16,6 +16,7 @@ flask-mail = "^0.10.0"
 flask-migrate = "^4.0.7"
 requests = "^2.32.3"
 itsdangerous = "^2.2.0"
+pymongo = "^4.8.0"
 
 
 [build-system]

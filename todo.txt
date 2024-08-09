@@ -1,3 +1,0 @@
-loader
-remake
-make a services page(how we sell our notes)
