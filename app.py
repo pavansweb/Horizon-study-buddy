@@ -28,8 +28,8 @@ app.config[
     'UPLOAD_FOLDER'] = 'uploads/profile_pics'  # Directory for uploaded files
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'horizonmailer555@gmail.com'
-app.config['MAIL_PASSWORD'] = 'sutd tgxd pgmk lice'
+app.config['MAIL_USERNAME'] = 'pavansh555@gmail.com'
+app.config['MAIL_PASSWORD'] = 'aasp jjpx ejtr bdjn'
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
@@ -246,18 +246,22 @@ def register():
     msg.body = f'Please click the link to verify your email: {verification_url}'
     try:
         mail.send(msg)
-        logger.info(f"New user registered: {email}")
+        logger.info(f"Verification email sent to: {email}")
     except Exception as e:
+        # Delete the user from the database if email sending fails
+        db.session.delete(new_user)
+        db.session.commit()
         logger.error(f"Error sending verification email to {email}: {e}")
         return jsonify({
             'message':
-            'Registration successful, but email could not be sent.'
+            'Unexpected error: Verification email could not be sent. Please try registering again.'
         }), 500
 
     return jsonify({
         'message':
         'Registration successful. Please check your email to verify your account.'
     }), 200
+
 
 
 def generate_confirmation_token(email):

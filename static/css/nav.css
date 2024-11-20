@@ -1,10 +1,18 @@
+:root {
+    --background-color: #f0f4f8;
+    --nav-bg: #0A0E17;
+}
+body.dark-mode {
+    --nav-bg: #0A0E17;
+    --background-color: #0A0E17;
+}
 /* Navbar styling */
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #333;
+    background-color: var(--nav-bg);
     color: #fff;
 }
 
