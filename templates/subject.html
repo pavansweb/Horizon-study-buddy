@@ -106,7 +106,7 @@
 </head>
 <body>
     <main>
-        <h1>{{ subject }} Mastery</h1>
+        <h1>{{ subject }} Chapters</h1>
         <div class="chapter-grid">
             {% for chapter in chapters %}
             <a href="{{ url_for('chapter_content', subject=subject, chapter=loop.index) }}" class="chapter-card" style="background-image: url('{{ chapter.image }}'); background-size: cover; background-position: center;">
@@ -123,7 +123,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.chapter-card');
             cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animationDelay = `${index * 0.2}s`;
                 card.classList.add('fade-in');
             });
         });
