@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Subject Selection</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6e8efb, #4a90e2);
+            --secondary-gradient: linear-gradient(135deg, #ff9966, #ff5e62);
+            --background-light: #f0f2f5;
+            --background-dark: #1a1b1f;
+            --text-color: #333;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition-speed: 0.3s;
+            --card-bg-light: rgba(255, 255, 255, 0.9);
+            --card-bg-dark: rgba(37, 38, 43, 0.9);
+            --hover-scale: 1.02;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-light);
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        body.darkmode {
+            --text-color: #ffffff;
+            background: linear-gradient(-45deg, #434343, #000000, #1a1a1a, #2c2c2c);
+            background-size: 400% 400%;
+        }
+
+        .container {
+            background: var(--card-bg-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 450px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        body.darkmode .container {
+            background: var(--card-bg-dark);
+        }
+
+        .subject-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .subject-btn {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border: none;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .subject-btn:hover {
+            transform: scale(var(--hover-scale));
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .subject-btn:hover::before {
+            left: 100%;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            background: var(--secondary-gradient);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* Subject-specific gradients */
+        .subject-btn[data-subject="physics"] {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .subject-btn[data-subject="chemistry"] {
+            background: linear-gradient(135deg, #fa709a, #fee140);
+        }
+
+        .subject-btn[data-subject="biology"] {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        .subject-btn[data-subject="history"] {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+        }
+
+        .subject-btn[data-subject="geography"] {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        /* Icon containers */
+        .subject-btn .icon {
+            margin-right: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .subject-btn:hover .icon {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    <div class="container">
+        <ul class="subject-list">
+            <li><button class="subject-btn" data-subject="physics" onclick="redirectToSubject('physics')">
+                <span class="icon">⚡</span>Physics
+            </button></li>
+            <li><button class="subject-btn" data-subject="chemistry" onclick="redirectToSubject('chemistry')">
+                <span class="icon">🧪</span>Chemistry
+            </button></li>
+            <li><button class="subject-btn" data-subject="biology" onclick="redirectToSubject('biology')">
+                <span class="icon">🧬</span>Biology
+            </button></li>
+            <li><button class="subject-btn" data-subject="history" onclick="redirectToSubject('history')">
+                <span class="icon">📜</span>History
+            </button></li>
+            <li><button class="subject-btn" data-subject="geography" onclick="redirectToSubject('geography')">
+                <span class="icon">🌍</span>Geography
+            </button></li>
+        </ul>
+    </div>
+
+    <script>
+        function redirectToSubject(subject) {
+            // Add click animation
+            const btn = document.querySelector(`[data-subject="${subject}"]`);
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+                window.location.href = `/subjects/${subject}`;
+            }, 150);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('darkmode');
+            const isDarkMode = document.body.classList.contains('darkmode');
+            localStorage.setItem('darkmode', isDarkMode);
+        }
+
+        // Check for saved theme preference
+        window.addEventListener('load', () => {
+            const isDarkMode = localStorage.getItem('darkmode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('darkmode');
+            }
+
+            // Add entrance animation for container
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
