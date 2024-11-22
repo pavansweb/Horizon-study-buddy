@@ -1,0 +1,44 @@
+# Byte-compiled / intermediate files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment variables and virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+*.env
+
+# Replit specific files
+.replit
+*.run
+config.json
+
+# IDE and editor specific files
+*.vscode/
+*.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs and database
+*.log
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Flask-specific
+instance/
+*.pyc
+*.db
+
+# Keep migrations, don't exclude them
