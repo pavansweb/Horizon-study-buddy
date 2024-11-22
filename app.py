@@ -538,7 +538,6 @@ def get_profile_picture(filename):
 
 subjects = {
     "physics": [
-        {"name": "Force", "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80"},
         {"name": "Work, Energy and Power", "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80"},
         {"name": "Machines", "image": "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?auto=format&fit=crop&w=800&q=80"},
         {"name": "Refraction of Light at Plane Surfaces", "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=800&q=80"},
@@ -547,10 +546,11 @@ subjects = {
         {"name": "Sound", "image": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=80"},
         {"name": "Current Electricity", "image": "https://images.unsplash.com/photo-1444703686981-a3abb4d4fe3?auto=format&fit=crop&w=800&q=80"},
         {"name": "Household Circuits", "image": "https://images.unsplash.com/photo-1462331321792-cc44368b8894?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Electro-magnetism", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Calorimetry", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
+        {"name": "Electro-Magnetism", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
+        {"name": "Calorimetry Solutions", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
         {"name": "Radioactivity", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"}
-    ],
+    ]
+,
     "chemistry": [
         {"name": "Atomic Structure", "image": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=800&q=80"},
         {"name": "Periodic Table", "image": "https://images.unsplash.com/photo-1588600878108-578307a3cc9d?auto=format&fit=crop&w=800&q=80"},
@@ -597,13 +597,21 @@ subjects = {
     ]
 }
 
+@app.route('/subjects')
+def subjects_route():
+    return render_template('subjects.html')
+
+
+    
 @app.route('/subjects/<subject>')
 def subject_chapters(subject):
     if subject in subjects:
         chapters = subjects[subject]
+        return render_template('subject.html', subject=subject, chapters=chapters)
     else:
-        chapters = [{"name": f"Chapter {i}", "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80"} for i in range(1, 11)]
-    return render_template('subject.html', subject=subject, chapters=chapters)
+        flash(f"Subject '{subject}' not found. Redirecting to the subjects list.", "error")  # Optional: Flash a message
+        return redirect(url_for('subjects_route'))
+
 
 @app.route('/subjects/<subject>/<int:chapter>')
 def chapter_content(subject, chapter):
@@ -620,7 +628,7 @@ def chapter_content(subject, chapter):
 
         return render_template('chapter.html', subject=subject, chapter=chapter, chapter_info=chapter_info, chapter_content=chapter_content)
     else:
-        abort(404)
+        return render_template('subjects.html')
 
 
 # Helper functions
