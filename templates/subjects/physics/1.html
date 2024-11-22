@@ -1,21 +1,225 @@
-<h2>Introduction to Physics</h2>
-<p>Physics is the natural science that studies matter, its motion and behavior through space and time, and the related entities of energy and force. Physics is one of the most fundamental scientific disciplines, and its main goal is to understand how the universe behaves.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work, Energy, and Power</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #4caf50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .section {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .info-box, .formula-box, .unit-box {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 10px 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .info-box h3, .formula-box h3, .unit-box h3 {
+            margin-top: 0;
+        }
+        ul {
+            list-style: disc inside;
+        }
+        ol {
+            list-style: decimal inside;
+        }
+        .code {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #333;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .highlight {
+            background-color: #fff3e0;
+            border-left: 5px solid #ffa726;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .cool-title {
+            color: #1e88e5;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
 
-<h3>Key Concepts</h3>
-<ul>
-    <li>Matter and Energy</li>
-    <li>Forces and Motion</li>
-    <li>Space and Time</li>
-    <li>Fundamental Particles</li>
-</ul>
+    <div class="section">
+        <h2>Work</h2>
+        <p>
+            In Physics, work is done only when a force applied to a body makes the body move. 
+            Work is defined mathematically as:
+        </p>
+        <div class="formula-box">
+            <h3>Formula:</h3>
+            <p><span class="cool-title">Work</span> = Force × Displacement × cos(θ)</p>
+        </div>
 
-<h3>Branches of Physics</h3>
-<ol>
-    <li>Classical Mechanics</li>
-    <li>Thermodynamics</li>
-    <li>Electromagnetism</li>
-    <li>Quantum Mechanics</li>
-    <li>Relativity</li>
-</ol>
+        <h3>Measurement of Work</h3>
+        <p>Work depends on:</p>
+        <ul>
+            <li>The magnitude of the force applied</li>
+            <li>The displacement produced</li>
+            <li>The angle between the force and displacement</li>
+        </ul>
 
-<p>This chapter will provide an overview of these concepts and branches, setting the foundation for your journey into the fascinating world of physics.</p>
+        <div class="info-box">
+            <h3>Special Cases:</h3>
+            <ul>
+                <li><strong>θ = 0°:</strong> Work is positive (W = F × S).</li>
+                <li><strong>θ = 90°:</strong> Work is zero (W = 0).</li>
+                <li><strong>θ = 180°:</strong> Work is negative (W = -F × S).</li>
+            </ul>
+        </div>
+
+        <h3>Work Done by Gravity</h3>
+        <p>When a body moves vertically, the work done by gravity is:</p>
+        <div class="formula-box">
+            <p><span class="cool-title">W</span> = mgh</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Units of Work</h2>
+        <div class="unit-box">
+            <p><strong>S.I. Unit:</strong> Joule (J)</p>
+            <p><strong>Definition:</strong> 1 Joule is the work done when a force of 1 Newton displaces a body by 1 meter in the direction of the force.</p>
+        </div>
+        <div class="unit-box">
+            <p><strong>C.G.S. Unit:</strong> Erg</p>
+            <p><strong>Definition:</strong> 1 Erg is the work done when a force of 1 dyne displaces a body by 1 cm in the direction of the force.</p>
+        </div>
+        <div class="highlight">
+            <strong>Relationship:</strong> 1 Joule = 10<sup>7</sup> erg
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Power</h2>
+        <p>Power is the rate of doing work. Mathematically, it is defined as:</p>
+        <div class="formula-box">
+            <p><span class="cool-title">P</span> = Work (W) / Time (t)</p>
+            <p>or</p>
+            <p><span class="cool-title">P</span> = Force × Velocity</p>
+        </div>
+        <h3>Units of Power</h3>
+        <ul>
+            <li><strong>S.I. Unit:</strong> Watt (W)</li>
+            <li><strong>C.G.S. Unit:</strong> Erg per second (erg s<sup>-1</sup>)</li>
+            <li><strong>Other Unit:</strong> Horsepower (H.P.), where 1 H.P. = 746 W</li>
+        </ul>
+    </div>
+
+    <h2>Energy (Energy as work done)</h2>
+    <p>A body capable of doing work is said to possess energy. The energy of a body is its capacity to do work.</p>
+
+    <h3>Units of Energy</h3>
+    <p>The units of energy are the same as that of work.</p>
+    <ul>
+        <li><strong>The S.I. unit of energy is joule (J)</strong> and the C.G.S. unit of energy is erg, where 1 J = 10⁷ erg.</li>
+        <li><strong>Bigger units of energy:</strong>
+            <ul>
+                <li><strong>Watt hour:</strong> One watt hour (1 Wh) is the energy spent (or work done) by a source of power 1 W in 1 h. 
+                <p>1 watt hour (Wh) = 1 watt x 1 hour = 1 J s⁻¹ × 3600 s = 3600 J = 3.6 KJ</p></li>
+                <li><strong>Kilowatt hour:</strong> One kilowatt hour (1 kWh) is the energy spent (or work done) by a source of power 1 kW in 1 h.
+                <p>1 kilowatt hour (kWh) = 1 kilowatt × 1 hour = 1000 J s⁻¹ × 3600 s = 3.6 × 10⁶ J = 3.6 MJ</p></li>
+                <li><strong>Calorie:</strong> Heat energy is usually measured in calorie. 1 calorie is the heat energy required to raise the temperature of 1 g of water through 1°C. It is related to joule as: 1 J = 0.24 calorie or 1 calorie = 4.18 J.</li>
+                <li><strong>Electron volt:</strong> The energy transfer in atomic particles is very small, so it is measured in electron volt (eV). 1 eV is the energy gained by an electron when it is accelerated through a potential difference of 1 volt.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Different Forms of Energy</h3>
+    <p>Nature has provided us with energy in various forms:</p>
+    <ol>
+        <li><strong>Solar energy:</strong> The energy radiated out by the Sun. Solar energy cannot be used directly to perform work because it is too diffused, but devices like solar panels, solar furnaces, and solar cells have been invented to make use of solar energy. 
+            <ul>
+                <li><strong>Solar Panel:</strong> A solar panel absorbs the sun's energy and heats water in its contact.</li>
+                <li><strong>Solar Furnace:</strong> A large aperture parabolic mirror focuses sun rays on a small area to achieve high temperature and generate steam.</li>
+                <li><strong>Solar Cells:</strong> Devices used to convert solar energy into electrical energy.</li>
+            </ul>
+        </li>
+        <li><strong>Heat energy:</strong> The energy released when burning fossil fuels or heating water to produce steam. It is used in steam engines to obtain work.</li>
+        <li><strong>Light energy:</strong> Energy that allows objects to be seen. It is emitted by the Sun and sources like candles and bulbs.</li>
+        <li><strong>Chemical (or fuel) energy:</strong> Energy stored in fossil fuels such as coal, petroleum, and natural gas. When burnt, chemical energy is converted into heat and light.</li>
+        <li><strong>Hydro energy:</strong> The energy possessed by fast-moving water. It is used to generate electricity in hydroelectric power stations by storing water in dams and allowing it to flow through channels.</li>
+        <li><strong>Electrical energy:</strong> Energy produced when two dry bodies are rubbed together and they get charged due to electron movement.</li>
+        <li><strong>Nuclear energy:</strong> Energy released due to the loss in mass during nuclear fission or fusion processes, as explained by Einstein's mass-energy relation.</li>
+        <li><strong>Geothermal energy:</strong> Energy stored inside the Earth from nuclear disintegrations, heating underground water to produce steam.</li>
+        <li><strong>Wind energy:</strong> Energy possessed by fast-moving air. It is used to drive windmills to pump water or grind grains in rural areas.</li>
+        <li><strong>Sound energy:</strong> Energy produced by vibrating bodies, which is sensed by our ears.</li>
+        <li><strong>Magnetic energy:</strong> Energy possessed by magnets, allowing them to attract iron filings.</li>
+        <li><strong>Mechanical energy:</strong> The sum of potential and kinetic energy. A body at rest or in motion possesses mechanical energy.</li>
+    </ol>
+
+    <h3>Mechanical Energy and its Different Forms</h3>
+    <p>The energy possessed by a body due to its state of rest or motion is called mechanical energy. It exists in two forms:</p>
+    <ul>
+        <li><strong>Potential Energy (U):</strong> Energy possessed by a body at rest due to its position or shape.</li>
+        <li><strong>Kinetic Energy (K):</strong> Energy possessed by a body due to its state of motion.</li>
+    </ul>
+
+    <h3>Potential Energy</h3>
+    <p>The energy possessed by a body due to its position or size is called potential energy.</p>
+    <p>Forms of potential energy include:</p>
+    <ul>
+        <li><strong>Gravitational Potential Energy:</strong> Energy due to the force of gravity exerted by Earth on a body.</li>
+        <li><strong>Elastic Potential Energy:</strong> Energy stored in a deformed body due to a change in its size or shape. This energy is released when the body regains its original form.</li>
+    </ul>
+
+    <h3>Gravitational Potential Energy at a Height (U = mgh)</h3>
+    <p>The work done in lifting a body to height 'h' is:</p>
+    <p>W = Force of gravity (mg) × Displacement (h) = mgh</p>
+    <p>Thus, the gravitational potential energy is:</p>
+    <p>U = mgh</p>
+
+    <h3>Kinetic Energy (K)</h3>
+    <p>The energy possessed by a body due to its state of motion is called kinetic energy.</p>
+    <p>The kinetic energy of a moving body is the amount of work it can do before coming to rest. It is given by:</p>
+    <p>K = 1/2 mv²</p>
+
+    <h3>Work Energy Theorem</h3>
+    <p>When a force is applied to a moving body, it accelerates the body and increases its kinetic energy. According to the work-energy theorem, the increase in kinetic energy is equal to the work done by the force.</p>
+
+    <h3>Conversion of Potential Energy into Kinetic Energy</h3>
+    <p>Potential energy changes into kinetic energy whenever it is put to use. Examples:</p>
+    <ul>
+        <li>A hammer at height has gravitational potential energy, which is converted into kinetic energy when it falls and drives a nail into wood.</li>
+        <li>A wound-up watch spring has elastic potential energy, which converts into kinetic energy to move the hands of the watch.</li>
+    </ul>
+
+    <div class="section">
+        <h2>Conservation of Energy</h2>
+        <p>The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another. In a closed system, the total energy remains constant. 
+            This means the sum of the kinetic energy and potential energy remains constant if no external force acts on the system. 
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Theoretical Verification of K + U = Constant</h2>
+        <p>For a freely falling body, the total mechanical energy (K + U) remains constant throughout the motion if only gravity is acting as the external force. This is an application of the conservation of mechanical energy. At the highest point, the object has maximum potential energy (U), and at the lowest point, it has maximum kinetic energy (K). Throughout the fall, the decrease in potential energy is equal to the increase in kinetic energy.</p>
+    </div>
+
+</body>
+</html>
