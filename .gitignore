@@ -19,8 +19,9 @@ env.bak/
 config.json
 
 # IDE and editor specific files
-*.vscode/
-*.idea/
+.idea/
+.vscode/
+*.breakpoints
 *.suo
 *.ntvs*
 *.njsproj
