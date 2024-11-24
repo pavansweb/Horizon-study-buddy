@@ -3,183 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ subject.capitalize() }} - {{ chapter_info.name }}</title>
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --background-color: #ecf0f1;
-            --text-color: #2c3e50;
-        }
+    <title>{{ chapter_info.name }} - Physics Quest</title>
+    <link rel="stylesheet" href="/static/css/chapter.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        
-
-        h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-
-        sectionheading{
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .chapter-image {
-            width: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .chapter-content {
-            line-height: 1.6;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-            h1, h2, h3 {
-                color: #007bff;
-            }
-            .note-box {
-                background-color: #f9f9f9;
-                border-left: 5px solid #007bff;
-                padding: 10px 15px;
-                margin: 20px 0;
-                border-radius: 5px;
-            }
-            
-            .expandable {
-                margin: 20px 0;
-            }
-            .expand-content {
-                display: none;
-                margin-top: 10px;
-            }
-            .expand-button {
-                background-color: #007bff;
-                color: white;
-                border: none;
-                padding: 10px 15px;
-                cursor: pointer;
-                border-radius: 5px;
-            }
-            .expand-button:hover {
-                background-color: #0056b3;
-            }
-            .summary {
-                padding: 20px;
-                background-color: #eef9ff;
-                border: 2px solid #00bcd4;
-                border-radius: 8px;
-                margin-top: 30px;
-            }
-            .sunnary h2 {
-                color: #00796b;
-            }
-            .sunnary ul {
-                list-style: disc;
-                padding-left: 20px;
-            }
-            .chapter-content {
-                margin-bottom: 30px;
-            }
-            .back-link {
-                text-decoration: none;
-                color: #007bff;
-                display: inline-block;
-                margin-top: 20px;
-            }
-            .back-link:hover {
-                text-decoration: underline;
-            }
-
-        .flip-card {
-            perspective: 1000px;
-            width: 300px;
-            height: 200px;
-            margin: 20px auto;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-        .flip-card-front {
-            background-color: #007bff;
-            color: white;
-        }
-        .flip-card-back {
-            background-color: #ff5722;
-            color: white;
-            transform: rotateY(180deg);
-        }
-    </style>
 </head>
 <body>
-    <main>
+
+<div id="main-container">
+    <div class="chapter-header">
         <h1>{{ chapter_info.name }}</h1>
-        <img src="{{ chapter_info.image }}" alt="{{ chapter_info.name }}" class="chapter-image">
-        <div class="chapter-content">
-            {{ chapter_content | safe }}
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" onclick="showContent()">Chapter Content</button>
+        <button class="btn" onclick="showQuiz()">Take Quiz</button>
+    </div>
+
+    <div id="chapter-content" class="chapter-content">
+        {{ chapter_content|safe }}
+    </div>
+
+    <div id="game-container">
+        <div class="stats">
+            <div class="stat">Score: <span id="score">0</span></div>
+            <div class="stat">Question: <span id="question-number">0</span></div>
         </div>
-        <a href="{{ url_for('subject_chapters', subject=subject) }}" class="back-link">&larr; Back to {{ subject.capitalize() }} Chapters</a>
-    </main>
+        <div class="progress-bar">
+            <div class="progress" id="progress" style="width: 0%"></div>
+        </div>
+        <div id="question-container" style="display: none;">
+            <div class="question-card" id="question-card">
+                <div class="question-text" id="question-text"></div>
+                <div id="options-container" class="options"></div>
+            </div>
+        </div>
+        <div id="feedback" class="feedback"></div>
+        <div id="game-over" class="game-over" style="display: none;"></div>
+    </div>
+</div>
 
     <script>
-        document.querySelectorAll('.expand-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                content.style.display = content.style.display === 'block' ? 'none' : 'block';
-                button.textContent = content.style.display === 'block' ? 'Show Less' : 'Show More';
+        // Fetch quiz data from the <script> tag in 1.html
+        const quizData = JSON.parse(document.getElementById('quiz-data').textContent);
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function showContent() {
+            document.getElementById('chapter-content').style.display = 'block';
+            document.getElementById('game-container').style.display = 'none';
+        }
+
+        function showQuiz() {
+            document.getElementById('chapter-content').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            startGame();
+        }
+
+        function startGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('game-over').style.display = 'none';
+            updateProgress();
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex) / quizData.mcqs.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('question-number').textContent = `${currentQuestionIndex + 1}/ ${quizData.mcqs.length}`;
+            document.getElementById('score').textContent = score;
+        }
+
+        function showQuestion() {
+            const question = quizData.mcqs[currentQuestionIndex];
+            document.getElementById('question-text').textContent = question.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('option');
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => checkAnswer(optionDiv, option, question.answer);
+                optionsContainer.appendChild(optionDiv);
             });
-        });
+        }
+
+        function checkAnswer(optionElement, selectedOption, correctAnswer) {
+            const feedback = document.getElementById('feedback');
+            const options = document.querySelectorAll('.option');
+
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+
+            if (selectedOption === correctAnswer) {
+                score++;
+                feedback.textContent = "✨ Brilliant! That's correct! ✨";
+                feedback.style.color = "var(--success-color)";
+                optionElement.classList.add('correct');
+            } else {
+                feedback.textContent = "💫 Not quite! Keep learning! 💫";
+                feedback.style.color = "var(--error-color)";
+                optionElement.classList.add('incorrect');
+
+                options.forEach(opt => {
+                    if (opt.textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            feedback.classList.add('show');
+
+            setTimeout(() => {
+                feedback.classList.remove('show');
+                currentQuestionIndex++;
+                updateProgress();
+
+                if (currentQuestionIndex < quizData.mcqs.length) {
+                    showQuestion();
+                } else {
+                    gameOver();
+                }
+            }, 2000);
+        }
+
+        function gameOver() {
+            document.getElementById('game-over').style.display = 'block';
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('game-over').innerHTML = `<h2>Game Over! Your score is: ${score}</h2>`;
+        }
     </script>
-    
+
 </body>
 </html>

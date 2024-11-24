@@ -1,197 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machines and Simple Machines - Interactive Guide</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-        section {
-            padding: 20px;
-        }
-        h2 {
-            color: #0073e6;
-        }
-        .dropdown {
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        .content-box {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .content-box img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .content-box h3 {
-            color: #333;
-        }
-        .content-box ul {
-            margin: 10px 0;
-        }
-        .content-box ul li {
-            margin: 5px 0;
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 100%; /* Position above the text */
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
+<!-- /templates/subjects/physics/<int>.html -->
+Content for this chapter is not avilable yet , TEST YOUR KNOWLEDGE BY TAKING A QUIZ FOR THIS CHAPTER!!
 
-<header>
-    <h1>Machines and Simple Machines - Interactive Guide</h1>
-</header>
+<!-- Storing the quiz data in a <script> tag -->
+<script id="quiz-data" type="application/json">
+    {
+        "mcqs": [
 
-<section>
-    <h2>What is a Machine?</h2>
-    <div class="content-box">
-        <p>A <strong>machine</strong> is a device designed to perform a specific task using various mechanical components. Machines often require energy sources such as electricity, gas, or steam to operate effectively.</p>
-    </div>
+            {
+              "question": "For work done to be maximum, the angle between the force and displacement should be:",
+              "options": ["0°", "30°", "45°", "90°"],
+              "answer": "0°",
+              "reason": "If the displacement is in the direction of force i.e., θ = 0°, then cos 0° = 1 and work done is maximum."
+            },
+            {
+              "question": "When a body moves in a circular path in a horizontal plane, the work done is:",
+              "options": ["Positive", "Negative", "Zero", "Maximum"],
+              "answer": "Zero",
+              "reason": "When a body revolves in a circular path under the influence of a force, on completing one round the displacement becomes zero, so the work done by the force is W = 0 because work done is a product of force and displacement."
+            },
+            {
+              "question": "When a ball m is thrown upwards to a height h, the work done by the force of gravity is:",
+              "options": ["mgh", "-mgh", "mg", "mgh²"],
+              "answer": "-mgh",
+              "reason": "When a ball m is thrown upwards to a height h, the displacement h (upwards) is opposite to the direction of force of gravity mg (downwards), so the work done by the force of gravity mg in displacement h is W = -mgh i.e., negative."
+            },
+            {
+              "question": "The S.I. unit of work is:",
+              "options": ["Joule", "erg", "Newton", "dyne"],
+              "answer": "Joule",
+              "reason": "The S.I. unit of work is joule. 1 joule of work is said to be done when a force of 1 newton displaces a body through a distance of 1 metre in its own direction."
+            },
+            {
+              "question": "A coolie A takes 1 minute to lift a load to the roof of a bus whereas coolie B takes 2 minutes to lift the same load to the roof of the same bus. The work done by B is:",
+              "options": ["equal to work done by A", "greater than work done by A", "less than work done by A", "none of the above"],
+              "answer": "equal to work done by A",
+              "reason": "Given that the distance lifted and the force applied are the same for both coolies, as they are lifting the same load to the same height (the roof of the bus) hence, the work done by both coolies is the same. The time taken to do the work doesn't affect the amount of work done."
+            },
+            {
+              "question": "One horse power is equal to:",
+              "options": ["1000 W", "500 W", "764 W", "746 W"],
+              "answer": "746 W",
+              "reason": "1 horse power = 746 W"
+            },
+            {
+              "question": "kWh is the unit of",
+              "options": ["Power", "Force", "Energy", "None of these"],
+              "answer": "Energy",
+              "reason": "One kWh is the energy spent (or work done) by a source of power 1 kW in 1 hour."
+            },
+            {
+              "question": "1 Joule is equivalent to ............... erg",
+              "options": ["105", "107", "109", "1"],
+              "answer": "107",
+              "reason": "1 Joule is equivalent to 107 erg"
+            },
+            {
+              "question": "The S.I. unit of power is",
+              "options": ["Watt", "Joule", "Nm", "Nms"],
+              "answer": "Watt",
+              "reason": "The S.I. unit of power is Watt. If 1 joule of work is said to be done in 1 second, the power spent is said to be 1 watt."
+            },
+            {
+              "question": "The energy of electron is 2.5 eV. When expressed in Joule, it is",
+              "options": ["1.6 x 10-19 J", "4.0 x 10-19 J", "3.2 x 10-19 J", "0"],
+              "answer": "4.0 x 10-19 J",
+              "reason": "Given, energy of electron = 2.5 eV. 1 eV = 1.6 x 10 -19 J. Hence, 2.5 eV = 2.5 x 1.6 x 10 -19 = 4 x 10 -19 J"
+            },
+            {
+              "question": "A block of mass 20 kg is pulled up a slope with a constant speed by applying a force of 200 N parallel to the slope. Work done in moving the block from A to B is:",
+              "options": ["600 J", "500 J", "60 J", "200 J"],
+              "answer": "600 J",
+              "reason": "Given, Force = 200 N, Displacement = S = 3 m. Work done = force × displacement in the direction of force. W = 200 × 3 = 600 J. Therefore, work done is 600J."
+            }
 
-    <h2>Machines in Physics</h2>
-    <div class="content-box">
-        <p>In physics, a machine is any mechanical device that receives input work and transforms it into output work. The <strong>six simple machines</strong> are:</p>
-        <ul>
-            <li><strong>Lever</strong></li>
-            <li><strong>Wheel and Axle</strong></li>
-            <li><strong>Pulley</strong></li>
-            <li><strong>Inclined Plane</strong></li>
-            <li><strong>Wedge</strong></li>
-            <li><strong>Screw</strong></li>
-        </ul>
-    </div>
+        ]
+    }
 
-    <h2>Functions and Uses of Simple Machines</h2>
-    <div class="content-box">
-        <h3>Functions of Simple Machines:</h3>
-        <ul>
-            <li><strong>Force Multiplier:</strong> Machines that allow us to lift heavy loads with less effort. Example: <em>Car jack</em></li>
-            <li><strong>Change Point of Application:</strong> Machines that allow effort to be applied at a convenient point. Example: <em>Bicycle pedal</em></li>
-            <li><strong>Change Direction of Effort:</strong> Machines that change the direction of effort. Example: <em>Fixed pulley</em></li>
-            <li><strong>Gain in Speed:</strong> Machines that allow a greater load movement with less effort. Example: <em>Scissors</em></li>
-        </ul>
-    </div>
-
-    <h2>Mechanical Advantage</h2>
-    <div class="content-box">
-        <p><strong>Mechanical Advantage (M.A.)</strong> is the ratio of the load to the effort applied on a machine. It can be classified into:</p>
-        <ul>
-            <li><strong>M.A. > 1:</strong> Force multiplier. Example: Jack lifting a car.</li>
-            <li><strong>M.A. < 1:</strong> Gain in speed. Example: Scissors.</li>
-            <li><strong>M.A. = 1:</strong> Change in direction of effort. Example: Fixed pulley.</li>
-        </ul>
-    </div>
-
-    <h2>Velocity Ratio</h2>
-    <div class="content-box">
-        <p><strong>Velocity Ratio (V.R.)</strong> is the ratio of the velocity of effort to the velocity of load. It can also indicate:</p>
-        <ul>
-            <li><strong>V.R. < 1:</strong> Gain in speed. Example: Gear mechanism.</li>
-            <li><strong>V.R. > 1:</strong> Force multiplier. Example: Pulleys.</li>
-            <li><strong>V.R. = 1:</strong> Change in direction of effort. Example: Fixed pulley.</li>
-        </ul>
-    </div>
-
-    <h2>Types of Levers</h2>
-    <div class="content-box">
-        <h3>There are three types of levers based on the relative position of effort, load, and fulcrum:</h3>
-        <ul>
-            <li><strong>Class I Lever:</strong> Fulcrum between effort and load. Example: Seesaw.</li>
-            <li><strong>Class II Lever:</strong> Load between effort and fulcrum. Example: Nutcracker.</li>
-            <li><strong>Class III Lever:</strong> Effort between load and fulcrum. Example: Sugar tongs.</li>
-        </ul>
-    </div>
-
-    <h2>Understanding Pulley Systems</h2>
-    <h2>Pulley Systems</h2>
-    <p>A single pulley can be used in two ways:</p>
-    <ul>
-      <li><strong>As a Fixed Pulley</strong>: This involves keeping the axis of rotation stationary, i.e., the frame of the pulley remains fixed in position.</li>
-      <li><strong>As a Movable Pulley</strong>: In this case, the axis of rotation is movable, meaning the entire pulley frame moves with the load.</li>
-    </ul>
-
-    <h3>Single Fixed Pulley</h3>
-    <p>A pulley which has its axis of rotation stationary in position is called a <strong>fixed pulley</strong>.</p>
-    <p>The friction between the string and the surface of the rim of the pulley causes the pulley to rotate when the string is pulled down. This system is mainly used to change the direction of the applied effort.</p>
-    <p><strong>Mechanical Advantage (M.A.), Velocity Ratio (V.R.), and Efficiency (n) for a Single Fixed Pulley:</strong></p>
-    <ul>
-      <li><strong>M.A. = Load / Effort</strong> — For a fixed pulley, M.A. is always equal to 1 because the force required to lift the load is equal to the applied effort.</li>
-      <li><strong>V.R. = 1</strong> — The velocity ratio is also 1 because the displacement of the effort is equal to the displacement of the load.</li>
-      <li><strong>Efficiency (n) = M.A. / V.R. = 1/1 = 1 (or 100%)</strong> — Ideally, the efficiency would be 100%, but in practical scenarios, friction at the axle or pulley bearings leads to energy loss, reducing the efficiency slightly.</li>
-    </ul>
-    <p>In actual practice, the friction at the axle or in the pulley bearings increases the effort slightly, making the efficiency less than 100%.</p>
-
-    <h3>Single Movable Pulley</h3>
-    <p>A pulley whose axis of rotation is movable (i.e., not fixed in position) is called a <strong>movable pulley</strong>.</p>
-    <p><strong>Mechanical Advantage (M.A.), Velocity Ratio (V.R.), and Efficiency (n) for a Single Movable Pulley:</strong></p>
-    <ul>
-      <li><strong>V.R. = 2</strong> — The velocity ratio is 2 because the displacement of the load is half the displacement of the effort.</li>
-      <li><strong>M.A. = 2</strong> — The mechanical advantage is 2, meaning the force required to lift the load is half of the load's weight.</li>
-      <li><strong>Efficiency (n) = M.A. / V.R. = 2/2 = 1 (or 100%)</strong> — An ideal movable pulley system would have 100% efficiency, though practical limitations may cause slight losses.</li>
-    </ul>
-
-    <h3>Combination of Pulleys</h3>
-    <p>Pulleys can also be combined in various configurations for increased mechanical advantage and speed. Below are the common systems used:</p>
-
-    <ul>
-      <li><strong>Using One Fixed Pulley and One Movable Pulley:</strong> This combination gives a mechanical advantage of 2, and the velocity ratio is also 2. The efficiency of such a system is ideally 100%, assuming minimal friction.</li>
-      <li><strong>Block and Tackle System:</strong> This system uses several pulleys arranged in two blocks (upper and lower). The mechanical advantage is equal to the total number of pulleys in both blocks, while the velocity ratio equals the number of strands of the tackle supporting the load.</li>
-    </ul>
-
-    <p><strong>Block and Tackle System Efficiency:</strong></p>
-    <ul>
-      <li>The number of pulleys in the upper block is equal to or greater than the number of pulleys in the lower block.</li>
-      <li>To improve efficiency, pulleys in the lower block should be as light as possible, and friction should be minimized.</li>
-    </ul>
-
-</section>
-
-</body>
-</html>
+</script>

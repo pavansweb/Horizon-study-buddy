@@ -538,63 +538,19 @@ def get_profile_picture(filename):
 
 subjects = {
     "physics": [
-        {"name": "Work, Energy and Power", "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Machines", "image": "https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Refraction of Light at Plane Surfaces", "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Refraction through a Lens", "image": "https://images.unsplash.com/photo-1608922133941-d3163e83f14d?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Spectrum", "image": "https://images.unsplash.com/photo-1635322966219-b75ed372eb01?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Sound", "image": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Current Electricity", "image": "https://images.unsplash.com/photo-1444703686981-a3abb4d4fe3?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Household Circuits", "image": "https://images.unsplash.com/photo-1462331321792-cc44368b8894?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Electro-Magnetism", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Calorimetry Solutions", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Radioactivity", "image": "https://images.unsplash.com/photo-1616676474744-d64d4aca8195?auto=format&fit=crop&w=800&q=80"}
-    ]
-,
-    "chemistry": [
-        {"name": "Atomic Structure", "image": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Periodic Table", "image": "https://images.unsplash.com/photo-1588600878108-578307a3cc9d?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Chemical Bonding", "image": "https://images.unsplash.com/photo-1603126429651-458c6ec76a4c?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Stoichiometry", "image": "https://images.unsplash.com/photo-1603126462770-c45b1c2e87c7?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Thermochemistry", "image": "https://images.unsplash.com/photo-1603126462747-c428b38c9d0b?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Chemical Kinetics", "image": "https://images.unsplash.com/photo-1603126462737-6851a8a6c11c?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Chemical Equilibrium", "image": "https://images.unsplash.com/photo-1603126462752-ef52d54ab3b9?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Acids and Bases", "image": "https://images.unsplash.com/photo-1603126462781-f24ef4f4668c?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Electrochemistry", "image": "https://images.unsplash.com/photo-1603126462788-d5f5f5c1afe8?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Organic Chemistry", "image": "https://images.unsplash.com/photo-1603126462795-2e3e51cfc396?auto=format&fit=crop&w=800&q=80"}
-    ],
-    "biology": [
-        {"name": "Cell Biology", "image": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Genetics", "image": "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Evolution", "image": "https://images.unsplash.com/photo-1509909756405-be0199881695?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Ecology", "image": "https://images.unsplash.com/photo-1500829243541-74b677fecc30?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Physiology", "image": "https://images.unsplash.com/photo-1530026510794-c283829f5b36?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Molecular Biology", "image": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Microbiology", "image": "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Botany", "image": "https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Zoology", "image": "https://images.unsplash.com/photo-1535083783855-76ae62b2914e?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Biochemistry", "image": "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80"}
-    ],
-    "history": [
-        {"name": "Ancient Civilizations", "image": "https://images.unsplash.com/photo-1549887534-4b1b3c2b7b1b?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Medieval Europe", "image": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Renaissance", "image": "https://images.unsplash.com/photo-1563201517-6c6f1f1f1f1f?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Industrial Revolution", "image": "https://images.unsplash.com/photo-1581091870621-1a9c7a1a1a1a?auto=format&fit=crop&w=800&q=80"},
-        {"name": "World War I", "image": "https://images.unsplash.com/photo-1581091870621-1a9c7a1a1a1a?auto=format&fit=crop&w=800&q=80"},
-        {"name": "World War II", "image": "https://images.unsplash.com/photo-1581091870621-1a9c7a1a1a1a?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Cold War", "image": "https://images.unsplash.com/photo-1581091870621-1a9c7a1a1a1a?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Modern History", "image": "https://images.unsplash.com/photo-1581091870621-1a9c7a1a1a1a?auto=format&fit=crop&w=800&q=80"}
-    ],
-    "geography": [
-        {"name": "Physical Geography", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Human Geography", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Cartography", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Climate", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Biomes", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Urban Geography", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Population Studies", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"},
-        {"name": "Environmental Geography", "image": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80"}
-    ]
+        {"name": "Force"},
+        {"name": "Work, Energy and Power"},
+        {"name": "Machines"},
+        {"name": "Refraction of Light at Plane Surfaces"},
+        {"name": "Refraction through a Lens"},
+        {"name": "Spectrum"},
+        {"name": "Sound"},
+        {"name": "Current Electricity"},
+        {"name": "Household Circuits"},
+        {"name": "Electro-Magnetism"},
+        {"name": "Calorimetry Solutions"},
+        {"name": "Radioactivity"}
+    ] 
 }
 
 @app.route('/subjects')
@@ -618,7 +574,7 @@ def chapter_content(subject, chapter):
     if subject in subjects and 1 <= chapter <= len(subjects[subject]):
         chapter_info = subjects[subject][chapter - 1]
 
-        # Attempt to load the chapter-specific HTML content
+        # Ensure chapter-specific content exists
         chapter_html_path = os.path.join('templates', 'subjects', subject, f'{chapter}.html')
         try:
             with open(chapter_html_path, 'r') as file:
@@ -626,9 +582,23 @@ def chapter_content(subject, chapter):
         except FileNotFoundError:
             chapter_content = "<p>Detailed content for this chapter is not available yet.</p>"
 
-        return render_template('chapter.html', subject=subject, chapter=chapter, chapter_info=chapter_info, chapter_content=chapter_content)
+        # Add default values for missing keys
+        chapter_info['mcqs'] = chapter_info.get('mcqs', [])
+        chapter_info['qas'] = chapter_info.get('qas', [])
+        chapter_info['flip_cards'] = chapter_info.get('flip_cards', [])
+        print(chapter_info)
+
+
+        return render_template(
+            'chapter.html', 
+            subject=subject, 
+            chapter=chapter, 
+            chapter_info=chapter_info, 
+            chapter_content=chapter_content
+        )
     else:
         return render_template('subjects.html')
+
 
 
 # Helper functions
@@ -650,4 +620,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Ensure the database is created
 
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    app.run(host='0.0.0.0', port=1, debug=True)

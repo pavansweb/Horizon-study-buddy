@@ -6,55 +6,98 @@
     <title>{{ subject.capitalize() }} Chapters</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --background-color: #ecf0f1;
-            --text-color: #2c3e50;
+            --primary-color: #4F46E5;
+            --secondary-color: #7C3AED;
+            --background-color: #0F172A;
+            --card-color: #1E293B;
+            --text-color: #E2E8F0;
+            --success-color: #22C55E;
+            --error-color: #EF4444;
+            --highlight-color: #8B5CF6;
+            --card-gradient: linear-gradient(135deg, rgba(79, 70, 229, 0.9), rgba(124, 58, 237, 0.9));
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--background-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 2rem auto;
             padding: 2rem;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
+            color: var(--text-color);
+            margin-bottom: 3rem;
             text-transform: capitalize;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--card-gradient);
+            border-radius: 2px;
+            animation: glowPulse 2s infinite;
         }
 
         .chapter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
         }
 
         .chapter-card {
             position: relative;
-            height: 200px;
-            border-radius: 8px;
+            height: 250px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-decoration: none;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            border: 1px solid rgba(79, 70, 229, 0.1);
         }
 
         .chapter-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2);
+            border-color: rgba(79, 70, 229, 0.3);
         }
 
         .chapter-card::before {
@@ -64,8 +107,15 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, 
+                rgba(15, 23, 42, 0) 0%,
+                rgba(15, 23, 42, 0.9) 100%);
             z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .chapter-card:hover::before {
+            background: var(--card-gradient);
         }
 
         .chapter-card-content {
@@ -73,20 +123,75 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 1rem;
-            color: white;
+            padding: 2rem;
+            color: var(--text-color);
             z-index: 2;
+            transform: translateY(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-card:hover .chapter-card-content {
+            transform: translateY(0);
         }
 
         .chapter-card h2 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin: 0 0 0.5rem 0;
+            font-weight: 600;
+            background: linear-gradient(to right, var(--text-color), var(--highlight-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .chapter-card p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin: 0;
-            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .chapter-card:hover p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 2;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .chapter-card:hover .chapter-number {
+            background: var(--primary-color);
+            transform: scale(1.1);
+            border-color: var(--highlight-color);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 0;
+            background: var(--success-color);
+            transition: width 0.3s ease;
+            z-index: 3;
+        }
+
+        .chapter-card:hover .progress-bar {
+            width: 100%;
         }
 
         @media (max-width: 768px) {
@@ -95,11 +200,16 @@
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .chapter-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .chapter-card {
+                height: 200px;
             }
         }
     </style>
@@ -109,22 +219,54 @@
         <h1>{{ subject }} Chapters</h1>
         <div class="chapter-grid">
             {% for chapter in chapters %}
-            <a href="{{ url_for('chapter_content', subject=subject, chapter=loop.index) }}" class="chapter-card" style="background-image: url('{{ chapter.image }}'); background-size: cover; background-position: center;">
+            <a href="{{ url_for('chapter_content', subject=subject, chapter=loop.index) }}" 
+               class="chapter-card" 
+               style="background-image: url('https://d33wubrfki0l68.cloudfront.net/8d79b89491cf9ef958be1386776dc937d39266be/1a630/img/particle_background.jpg'); background-size: cover; background-position: center; animation-delay: {{ loop.index * 0.1 }}s;">
+                <span class="chapter-number">Chapter {{ loop.index }}</span>
                 <div class="chapter-card-content">
-                    <h2>Chapter {{ loop.index }}</h2>
-                    <p>{{ chapter.name }}</p>
+                    <h2>{{ chapter.name }}</h2>
+                    <p>Click to explore this chapter</p>
                 </div>
+                <div class="progress-bar"></div>
             </a>
             {% endfor %}
         </div>
     </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.chapter-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.2}s`;
-                card.classList.add('fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px)';
+                });
             });
         });
     </script>
