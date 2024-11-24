@@ -543,13 +543,13 @@ subjects = {
         {"name": "Machines"},
         {"name": "Refraction of Light at Plane Surfaces"},
         {"name": "Refraction through a Lens"},
-        {"name": "Spectrum"},
-        {"name": "Sound"},
-        {"name": "Current Electricity"},
-        {"name": "Household Circuits"},
-        {"name": "Electro-Magnetism"},
-        {"name": "Calorimetry Solutions"},
-        {"name": "Radioactivity"}
+        # {"name": "Spectrum"},
+        # {"name": "Sound"},
+        # {"name": "Current Electricity"},
+        # {"name": "Household Circuits"},
+        # {"name": "Electro-Magnetism"},
+        # {"name": "Calorimetry Solutions"},
+        # {"name": "Radioactivity"}
     ] 
 }
 

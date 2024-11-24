@@ -13,6 +13,7 @@ window.addEventListener('load', function() {
     setTimeout(function() {
         document.getElementById('overlay').classList.add('hidden');
     }, 100); // 
+     localStorage.setItem("dark-mode", "enabled" );
 });
 
 // Function to set dark mode icons
