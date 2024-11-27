@@ -3,229 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Subject Selection</title>
+    <title>HORIZON - Choose Your Learning Battlefield</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #6e8efb, #4a90e2);
-            --secondary-gradient: linear-gradient(135deg, #ff9966, #ff5e62);
-            --background-light: #f0f2f5;
-            --background-dark: #1a1b1f;
-            --text-color: #333;
-            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
-            --transition-speed: 0.3s;
-            --card-bg-light: rgba(255, 255, 255, 0.9);
-            --card-bg-dark: rgba(37, 38, 43, 0.9);
-            --hover-scale: 1.02;
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --background-dark: #0a0a1a;
+            --text-color-light: #e0e0ff;
+            --card-bg: rgba(20, 20, 50, 0.8);
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Orbitron', 'Arial', sans-serif;
+            background: linear-gradient(45deg, #0a0a1a, #1a1a3a);
+            color: var(--text-color-light);
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--background-light);
-            color: var(--text-color);
-            transition: all var(--transition-speed) ease;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-
-        body.darkmode {
-            --text-color: #ffffff;
-            background: linear-gradient(-45deg, #434343, #000000, #1a1a1a, #2c2c2c);
-            background-size: 400% 400%;
-        }
-
-        .container {
-            background: var(--card-bg-light);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            max-width: 450px;
-            width: 90%;
+            padding: 1rem 5%;
+            background: rgba(10, 10, 26, 0.9);
             backdrop-filter: blur(10px);
-            animation: float 6s ease-in-out infinite;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        body.darkmode .container {
-            background: var(--card-bg-dark);
+        .logo {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .subject-list {
+        .logo i {
+            color: var(--primary-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
             list-style: none;
-            padding: 0;
-            margin: 0;
+            gap: 1.5rem;
+            align-items: center;
         }
 
-        .subject-btn {
+        .nav-links a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
             width: 100%;
-            padding: 1rem;
-            margin: 0.8rem 0;
-            border: none;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: var(--border-radius);
+        }
+
+        /* User Profile Dropdown */
+        .user-profile {
+            position: relative;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all var(--transition-speed) ease;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            min-width: 200px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            padding: 1rem;
+            z-index: 1100;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+            animation: dropdownAppear 0.3s ease;
+        }
+
+        @keyframes dropdownAppear {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-dropdown a {
+            display: block;
+            color: var(--text-color-light);
+            padding: 0.5rem 0;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,255,255,0.1);
+        }
+
+        .profile-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile-dropdown a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Subjects Container */
+        .subjects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 3rem 5%;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            width: 250px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .subject-btn::before {
+        .subject-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%);
+            transform: rotate(0deg);
+            transition: transform 0.5s ease;
         }
 
-        .subject-btn:hover {
-            transform: scale(var(--hover-scale));
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .subject-btn:hover::before {
-            left: 100%;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            background: var(--secondary-gradient);
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all var(--transition-speed) ease;
-        }
-
-        .theme-toggle:hover {
+        .subject-card:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
-        /* Subject-specific gradients */
-        .subject-btn[data-subject="physics"] {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        .subject-card:hover::before {
+            transform: rotate(180deg);
         }
 
-        .subject-btn[data-subject="chemistry"] {
-            background: linear-gradient(135deg, #fa709a, #fee140);
+        .subject-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
-        .subject-btn[data-subject="biology"] {
-            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        .subject-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .subject-btn[data-subject="history"] {
-            background: linear-gradient(135deg, #f6d365, #fda085);
+        .subject-description {
+            color: var(--text-color-light);
+            opacity: 0.8;
         }
 
-        .subject-btn[data-subject="geography"] {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .coming-soon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: var(--background-dark);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
         }
 
-        /* Icon containers */
-        .subject-btn .icon {
-            margin-right: 10px;
-            display: inline-block;
-            transition: transform 0.3s ease;
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
         }
 
-        .subject-btn:hover .icon {
-            transform: rotate(360deg);
+        .glitch-text {
+            animation: glitch 1s linear infinite;
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
-    <div class="container">
-        <ul class="subject-list">
-            <li style="color: red;">Only Physics is avilable currently , other subjects coming sooon</li>
-            <li><button class="subject-btn" data-subject="physics" onclick="redirectToSubject('physics')">
-                <span class="icon">⚡</span>Physics
-            </button></li>
-            <li><button class="subject-btn" data-subject="chemistry" onclick="redirectToSubject('chemistry')">
-                <span class="icon">🧪</span>Chemistry
-            </button></li>
-            <li><button class="subject-btn" data-subject="biology" onclick="redirectToSubject('biology')">
-                <span class="icon">🧬</span>Biology
-            </button></li>
-            <li><button class="subject-btn" data-subject="history" onclick="redirectToSubject('history')">
-                <span class="icon">📜</span>History
-            </button></li>
-            <li><button class="subject-btn" data-subject="geography" onclick="redirectToSubject('geography')">
-                <span class="icon">🌍</span>Geography
-            </button></li>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-bolt"></i>
+            HORIZON
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/subjects">Subjects</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="user-profile" id="userProfile" style="display: none;">
+                <img src="/static/icons/user-profile.png" alt="Profile" id="profileImage">
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="/profile">My Profile</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </li>
         </ul>
+    </nav>
+
+    <div class="subjects-container">
+        <div class="subject-card physics-card" data-subject="physics">
+            <i class="fas fa-atom subject-icon"></i>
+            <h2 class="subject-title">Physics</h2>
+            <p class="subject-description">Unlock the mysteries of the universe, one equation at a time.</p>
+        </div>
+
+        <div class="subject-card chemistry-card" data-subject="chemistry">
+            <i class="fas fa-flask subject-icon"></i>
+            <h2 class="subject-title">Chemistry</h2>
+            <p class="subject-description">Mix, react, and explore the world of molecules and reactions.</p>
+        </div>
+
+        <div class="subject-card biology-card" data-subject="biology">
+            <i class="fas fa-dna subject-icon"></i>
+            <h2 class="subject-title">Biology</h2>
+            <p class="subject-description">Dive deep into the intricate world of life and living systems.</p>
+        </div>
+
+        <div class="subject-card history-card" data-subject="history">
+            <i class="fas fa-landmark subject-icon"></i>
+            <h2 class="subject-title">History</h2>
+            <p class="subject-description">Travel through time and uncover the stories that shaped our world.</p>
+        </div>
+
+        <div class="subject-card geography-card" data-subject="geography">
+            <i class="fas fa-globe-americas subject-icon"></i>
+            <h2 class="subject-title">Geography</h2>
+            <p class="subject-description">Explore the landscapes, cultures, and interconnections of our planet.</p>
+        </div>
     </div>
 
     <script>
-        function redirectToSubject(subject) {
-            // Add click animation
-            const btn = document.querySelector(`[data-subject="${subject}"]`);
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
+        // Select all cards with the "subject-card" class
+        document.querySelectorAll('.subject-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const subject = card.getAttribute('data-subject');
                 window.location.href = `/subjects/${subject}`;
-            }, 150);
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle('darkmode');
-            const isDarkMode = document.body.classList.contains('darkmode');
-            localStorage.setItem('darkmode', isDarkMode);
-        }
-
-        // Check for saved theme preference
-        window.addEventListener('load', () => {
-            const isDarkMode = localStorage.getItem('darkmode') === 'true';
-            if (isDarkMode) {
-                document.body.classList.add('darkmode');
-            }
-
-            // Add entrance animation for container
-            const container = document.querySelector('.container');
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(20px)';
-
-            setTimeout(() => {
-                container.style.transition = 'all 0.6s ease';
-                container.style.opacity = '1';
-                container.style.transform = 'translateY(0)';
-            }, 100);
+            });
         });
     </script>
+
 </body>
 </html>

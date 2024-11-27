@@ -6,8 +6,8 @@
     <title>{{ subject.capitalize() }} Chapters</title>
     <style>
         :root {
-            --primary-color: #4F46E5;
-            --secondary-color: #7C3AED;
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
             --background-color: #0F172A;
             --card-color: #1E293B;
             --text-color: #E2E8F0;
@@ -32,6 +32,56 @@
             0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
             50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
             100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(10, 10, 26, 0.9);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         body {
@@ -215,13 +265,21 @@
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <a href="/" class="logo">HORIZON</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/subjects">Subjects</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
     <main>
         <h1>{{ subject }} Chapters</h1>
         <div class="chapter-grid">
             {% for chapter in chapters %}
             <a href="{{ url_for('chapter_content', subject=subject, chapter=loop.index) }}" 
                class="chapter-card" 
-               style="background-image: url('https://d33wubrfki0l68.cloudfront.net/8d79b89491cf9ef958be1386776dc937d39266be/1a630/img/particle_background.jpg'); background-size: cover; background-position: center; animation-delay: {{ loop.index * 0.1 }}s;">
+               style="background-image: url('https://static.vecteezy.com/system/resources/previews/010/671/880/non_2x/abstract-technology-futuristic-neon-circle-glowing-blue-and-pink-light-lines-with-speed-motion-blur-effect-on-dark-blue-background-illustration-free-vector.jpg'); background-size: cover; background-position: center; animation-delay: {{ loop.index * 0.1 }}s;">
                 <span class="chapter-number">Chapter {{ loop.index }}</span>
                 <div class="chapter-card-content">
                     <h2>{{ chapter.name }}</h2>

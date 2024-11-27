@@ -466,6 +466,54 @@ def userinfo(user_id):
     return jsonify({'message': 'User not found'}), 404
 
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if 'user_id' not in session:
+        flash('You need to log in to access your profile.', 'error')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found.', 'error')
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
+        # Handle profile updates
+        name = request.form.get('name')
+        email = request.form.get('email')
+        current_password = request.form.get('current_password')
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        # Update name and email
+        if name:
+            user.name = name
+        if email:
+            user.email = email
+
+        # Handle password change
+        if current_password and new_password and confirm_password:
+            if not check_password_hash(user.password_hash, current_password):
+                flash('Current password is incorrect.', 'error')
+                return redirect(url_for('profile'))
+            if new_password != confirm_password:
+                flash('New passwords do not match.', 'error')
+                return redirect(url_for('profile'))
+            user.password_hash = generate_password_hash(new_password)
+
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('profile.html', user={
+        'email': user.email,
+        'joined': user.created_at.strftime('%Y-%m-%d'),
+        'profile_picture': user.profile_picture,
+        'name': user.name
+    })
+
+
+
 @app.route('/update-name', methods=['POST'])
 def update_name():
     if 'user_id' not in session:
@@ -543,13 +591,32 @@ subjects = {
         {"name": "Machines"},
         {"name": "Refraction of Light at Plane Surfaces"},
         {"name": "Refraction through a Lens"},
-        # {"name": "Spectrum"},
-        # {"name": "Sound"},
-        # {"name": "Current Electricity"},
-        # {"name": "Household Circuits"},
-        # {"name": "Electro-Magnetism"},
-        # {"name": "Calorimetry Solutions"},
-        # {"name": "Radioactivity"}
+        {"name": "Spectrum"},
+        {"name": "Sound"},
+        {"name": "Current Electricity"},
+        {"name": "Household Circuits"},
+        {"name": "Electro-Magnetism"},
+        {"name": "Calorimetry"},
+        {"name": "Radioactivity"}
+    ] ,
+
+    "geography": [
+        {"name": "Climate"},
+        {"name": "Soil Resources"},
+        {"name": "Natural Vegetation"},
+        {"name": "Water Resources"},
+        {"name": "Mineral Resources"},
+        {"name": "Conventional Sources of Energy"},
+        {"name": "Non-Conventional Sources of Energy"},
+        {"name": "Agriculture - 1 "},
+        {"name": "Agriculture - 2: Food crops"},
+        {"name": "Agriculture - 3: Cash crops(1) "},
+        {"name": "Agriculture - 4: Cash crops(2) "},
+        {"name": "Manufacturing Industries(Agro-Based) "},
+        {"name": "Mineral Based Industries"},
+        {"name": "Transport"},
+        {"name": "Waste Management 1"},
+        {"name": "Waste Management 2"}
     ] 
 }
 

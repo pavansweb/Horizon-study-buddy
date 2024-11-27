@@ -1,149 +1,498 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizon Learners</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --bg-dark: #0a0a1a;
+            --text-primary: #00ffff;
+            --text-secondary: #ff00ff;
+            --accent-color: #8a2be2;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
 
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .cyberpunk-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.8)),
+                repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.03), rgba(0, 255, 255, 0.03) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(10, 10, 26, 0.9);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+            /* Profile Dropdown */
+            .profile-dropdown {
+                position: relative;
+                cursor: pointer;
+            }
+
+            .profile-dropdown img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid var(--primary-color);
+            }
+
+            .dropdown-menu {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                background-color: var(--bg-dark);
+                border: 1px solid var(--primary-color);
+                padding: 10px;
+                border-radius: 5px;
+                display: none;
+                z-index: 100;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .dropdown-menu a {
+                display: block;
+                color: var(--primary-color);
+                text-decoration: none;
+                padding: 8px 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-menu a:hover {
+                background-color: rgba(0, 255, 255, 0.1);
+            }
+
+            .profile-dropdown img:hover + .dropdown-menu,
+            .dropdown-menu:hover {
+                display: block;
+            }
+
+        
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Subjects Section */
+        .subjects-section {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 50px 0;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .subject-card {
+            background: linear-gradient(145deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
+            border: 2px solid var(--primary-color);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: rgba(30, 30, 60, 0.5);
+            padding: 50px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1));
+            border: 2px solid var(--secondary-color);
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(10,10,26,0.9), rgba(20,20,50,0.9));
+            transition: right 0.5s ease;
+            z-index: 1000;
+            padding: 30px;
+            border-left: 2px solid var(--primary-color);
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .profile-pic {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-pic .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-pic:hover .overlay {
+            opacity: 1;
+        }
+
+        .profile-pic input {
+            display: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="cyberpunk-grid"></div>
 
     <nav class="nav">
-        <button id="toggleSidebarButton" class="btn btn-secondary" onclick="toggleSidebar()"> </button>
-        
-        <a href="#" class="logo">Horizon</a>
+        <a href="/" class="logo">HORIZON</a>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="/subjects">Subjects</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li id="loginNavItem" class="nav-item"><a href="/login" class="  ">Login/Sign Up</a></li>
-            
+            <li id="loginNavItem"><a href="/login">Login/Sign Up</a></li>
         </ul>
-        <label class="switch">
-            <input type="checkbox" id="darkModeToggle" />
-            <span class="slider round"></span>
-            <span class="icon sun-icon">&#x2600;</span>
-            <span class="icon moon-icon">&#x1F319;</span>
-        </label>
+        <div id="profileDropdown" class="profile-dropdown">
+            <img style='height: 40px' id="profilePicture" src="/static/icons/user-profile.png" alt="Profile Picture" onclick="toggleDropdown()">
+            <div id="dropdownMenu" class="dropdown-menu">
+                <a href="/profile">Profile</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
     </nav>
-    
+
     <main>
         <section class="hero">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1>Unlock Your Learning Potential with Study Buddy</h1>
-                    <p>Your personal study heaven. Get all notes, interactive quizzes, and ace your exams.</p>
-                    <a href="/subjects" class="btn btn-primary">Get Started</a>
+                    <h1>LEVEL UP YOUR LEARNING</h1>
+                    <p>Say goodbye to the old boring way of studying!</p>
+                    <a href="/subjects" class="btn">START THE QUEST</a>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Students studying together" width="600" height="400">
+                    <img src="https://i.pinimg.com/236x/62/da/5e/62da5e094b35bd109fa470fd07f5b869.jpg" 
+                         alt="Cyberpunk Learning" 
+                         style="max-width: 100%; border-radius: 10px; box-shadow: 0 0 20px var(--primary-color);">
                 </div>
             </div>
         </section>
 
         <section class="subjects-section" id="subjects">
             <div class="container">
-                <h2> Subjects</h2>
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">CHOOSE YOUR BATTLEFIELD</h2>
                 <div class="subjects-grid">
-                    <a class="subject-card" href="/subjects/physics" style="text-decoration: none;">Physics</a>
-                    <a class="subject-card" href="/subjects/chemistry" style="text-decoration: none;">Chemistry</a>
-                    <!-- <a class="subject-card" href="/subjects/biology" style="text-decoration: none;">Biology</a>
-                    <a class="subject-card" href="/subjects/history" style="text-decoration: none;">History</a>
-                    <a class="subject-card" href="/subjects/geography" style="text-decoration: none;">Geography</a> -->
+                    <a class="subject-card" href="/subjects/physics">PHYSICS</a>
+                    <a class="subject-card" href="/subjects/geography">Geography</a>
+                    <a class="subject-card" href="/subjects/chemistry">CHEMISTRY</a>
                 </div>
-
             </div>
         </section>
 
         <section class="features-section" id="features">
             <div class="container">
-                <h2>Why Choose Study Buddy?</h2>
+                <h2 style="text-align: center; color: var(--secondary-color); margin-bottom: 30px;">YOUR LEARNING POWER-UPS</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h3>Personalized Learning</h3>
-                        <p>AI-powered study plans tailored to your unique needs and goals.</p>
-                        <img src="/static/icons/bulb.png" width="100">
+                        <h3 style="color: var(--primary-color);">Stay Ahead</h3>
+                        <p>Say goodbye to walls of text. Hello, learning that’s actually fun.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Comprehensive Notes</h3>
-                        <p>Access a vast library of detailed notes for every subject.</p>    <img src="/static/icons/notes.png" width="120">
+                        <h3 style="color: var(--primary-color);">Endless Knowledge Vault</h3>
+                        <p>Because we never run out of facts to blow your mind.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Interactive Quizzes</h3>
-                        <p>Test your knowledge with engaging quizzes and track your progress.</p> <img src="/static/icons/quiz_question_mark.png" width="120">
+                        <h3 style="color: var(--primary-color);">Interactive Nerd Modules</h3>
+                        <p>Learning that adapts faster than a meme trend.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="cta-section">
-            <div class="container">
-                <h2>Ready to Boost Your Grades?</h2>
-                <p>Join Study Buddy today and transform your learning experience!</p>
-                <a href="/subjects" class="btn">Check out Subjects</a>
-            </div>
-        </section>
     </main>
+
 
     <!-- Sidebar for account settings -->
     <div id="sidebar" class="sidebar">
-        <span class="close-btn" onclick="toggleSidebar()">×</span>
-        <h3>Account Settings</h3>
         <div id="user-info">
-            <!-- User info will be populated here -->
+            <div class="profile-pic">
+                <img id="profileImage" src="/static/icons/user-profile.png" alt="Profile">
+                <div class="overlay">
+                    <label for="fileInput" style="color: var(--primary-color); cursor: pointer;">
+                        UPLOAD
+                        <input type="file" id="fileInput" onchange="uploadProfilePicture(event)">
+                    </label>
+                </div>
+            </div>
+            
+            <div id="userDetails" style="text-align: center;">
+                <h3 id="userName" style="color: var(--primary-color);">USERNAME</h3>
+                <p id="userEmail" style="color: var(--text-secondary);">EMAIL</p>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+                <button onclick="logout()" class="btn" style="background: linear-gradient(135deg, #ff0000, #8b0000);">LOGOUT</button>
+                <button class="btn" onclick="window.location.href='/change-password'">RESET PASSWORD</button>
+            </div>
         </div>
     </div>
 
+    <script>
+        // Sidebar Toggle
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
 
 
-    <footer>
-        <div class="f-item-con">
-            <div class="app-info">
-                <span class='app-name'>
-                   Horizon
-                </span>
-                <p>We provide you with <strong>best</strong> and <strong>still the best</strong> products</p>
-            </div>
-            <div class="useful-links">
-                <div class="footer-title">Useful Links</div>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            
-            </div>
-            <div class="g-i-t">
-                <div class="footer-title">Get in Touch</div>
-                <form class="contact-form" method="post" action="{{ url_for('contact') }}">
-                    <div class="form-group">
-                        <input type="text" id="input-name" name="name" class="form-control" placeholder="Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="input-email" name="email" class="form-control" placeholder="Email address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="input-subject" name="subject" class="form-control" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" id="input-message" class="form-control" placeholder="Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-        <div class='cr-con'>Copyright &copy; 2024 | Horizon</div>
-    </footer>
+        // Fetch user info
+        fetch("/user")
+            .then((response) => response.json())
+            .then((data) => {
+                const loginNavItem = document.getElementById("loginNavItem");
+                const toggleSidebarButton = document.getElementById("toggleSidebarButton");
 
+                if (data.email) {
+                    // User is logged 
+                    document.getElementById('profilePicture').style.display = "block";
+                    loginNavItem.style.display = "none";
+                    document.getElementById('profilePicture').src = data.profile_picture;
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/static/js/index.js"></script>
+                    document.getElementById('userName').textContent = data.name || 'ANONYMOUS USER';
+                    document.getElementById('userEmail').textContent = data.email;
+                    
+                    
+                } else {
+                    // User is not logged in
+                    document.getElementById('profilePicture').style.display = "none";
+                    loginNavItem.style.display = "block";
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching user info:", error);
+            });
+
+        // Profile Picture Upload
+        function uploadProfilePicture(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
+
+                fetch("/upload-profile-picture", {
+                    method: "POST",
+                    body: formData,
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.message === "Profile picture uploaded successfully") {
+                        document.getElementById('profileImage').src = data.profile_picture_url;
+                    } else {
+                        alert("Profile picture upload failed: " + data.message);
+                    }
+                })
+                .catch(() => {
+                    alert("Error during profile picture upload");
+                });
+            }
+        }
+
+        // Logout Function
+        function logout() {
+            fetch("/logout", { method: "POST" })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        window.location.href = "/login";
+                    } else {
+                        alert("Logout failed");
+                    }
+                })
+                .catch((error) => {
+                    alert("Logout failed");
+                });
+        }
+    </script>
 </body>
-</html>
