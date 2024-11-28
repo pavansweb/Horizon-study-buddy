@@ -99,54 +99,38 @@
             width: 100%;
         }
 
-            /* Profile Dropdown */
-            .profile-dropdown {
-                position: relative;
-                cursor: pointer;
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
             }
 
-            .profile-dropdown img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 2px solid var(--primary-color);
-            }
-
-            .dropdown-menu {
-                position: absolute;
-                top: 50px;
-                right: 0;
-                background-color: var(--bg-dark);
-                border: 1px solid var(--primary-color);
-                padding: 10px;
-                border-radius: 5px;
+            .nav-links {
                 display: none;
-                z-index: 100;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                flex-direction: column;
+                background-color: var(--bg-dark);
+                position: absolute;
+                top: 0px; 
+                right: 0;
+                width: 100%;
+                border-top: 2px solid var(--primary-color);
+                z-index: 10;
             }
 
-            .dropdown-menu a {
-                display: block;
-                color: var(--primary-color);
-                text-decoration: none;
-                padding: 8px 15px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            .nav-links.active {
+                display: flex;
+                padding-bottom: 20px
             }
-
-            .dropdown-menu a:last-child {
-                border-bottom: none;
-            }
-
-            .dropdown-menu a:hover {
-                background-color: rgba(0, 255, 255, 0.1);
-            }
-
-            .profile-dropdown img:hover + .dropdown-menu,
-            .dropdown-menu:hover {
-                display: block;
-            }
-
-        
+        }
 
         /* Hero Section */
         .hero {
@@ -171,13 +155,13 @@
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 15px var(--primary-color);
+            color: var(--secondary-color);
+            text-shadow: 0 0 15px var(--secondary-color);
             margin-bottom: 20px;
         }
 
         .hero p {
-            color: var(--text-secondary);
+            color: var(--text-primary);
             margin-bottom: 30px;
         }
 
@@ -322,6 +306,11 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .hero h1{
+                font-size: 2rem;
+                margin-top: 30px;
+            }
         }
     </style>
 </head>
@@ -330,20 +319,18 @@
 
     <nav class="nav">
         <a href="/" class="logo">HORIZON</a>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
+        <button id="menuToggle" class="menu-toggle">
+            &#9776;
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li> </li>
             <li><a href="/subjects">Subjects</a></li>
             <li><a href="/contact">Contact</a></li>
+            <a href="/profile"><img src="/static/icons/user-profile.png" alt="User Profile" id='profilePicture' width="50" height="50" style="cursor: pointer; border-radius: 50%; border: 2px solid var(--primary-color); margin-right: 10px;" ></a>
             <li id="loginNavItem"><a href="/login">Login/Sign Up</a></li>
         </ul>
-        <div id="profileDropdown" class="profile-dropdown">
-            <img style='height: 40px' id="profilePicture" src="/static/icons/user-profile.png" alt="Profile Picture" onclick="toggleDropdown()">
-            <div id="dropdownMenu" class="dropdown-menu">
-                <a href="/profile">Profile</a>
-                <a href="#" onclick="logout()">Logout</a>
-            </div>
-        </div>
     </nav>
+
 
     <main>
         <section class="hero">
@@ -394,37 +381,14 @@
     </main>
 
 
-    <!-- Sidebar for account settings -->
-    <div id="sidebar" class="sidebar">
-        <div id="user-info">
-            <div class="profile-pic">
-                <img id="profileImage" src="/static/icons/user-profile.png" alt="Profile">
-                <div class="overlay">
-                    <label for="fileInput" style="color: var(--primary-color); cursor: pointer;">
-                        UPLOAD
-                        <input type="file" id="fileInput" onchange="uploadProfilePicture(event)">
-                    </label>
-                </div>
-            </div>
-            
-            <div id="userDetails" style="text-align: center;">
-                <h3 id="userName" style="color: var(--primary-color);">USERNAME</h3>
-                <p id="userEmail" style="color: var(--text-secondary);">EMAIL</p>
-            </div>
-
-            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-                <button onclick="logout()" class="btn" style="background: linear-gradient(135deg, #ff0000, #8b0000);">LOGOUT</button>
-                <button class="btn" onclick="window.location.href='/change-password'">RESET PASSWORD</button>
-            </div>
-        </div>
-    </div>
+    
 
     <script>
-        // Sidebar Toggle
-        function toggleDropdown() {
-            const menu = document.getElementById('dropdownMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
+        
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
 
 
         // Fetch user info
@@ -445,8 +409,9 @@
                     
                     
                 } else {
-                    // User is not logged in
+                    // User is not logged in 
                     document.getElementById('profilePicture').style.display = "none";
+                    document.getElementById('logoutBtn').style.display = "none";
                     loginNavItem.style.display = "block";
                 }
             })
@@ -454,45 +419,6 @@
                 console.error("Error fetching user info:", error);
             });
 
-        // Profile Picture Upload
-        function uploadProfilePicture(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const formData = new FormData();
-                formData.append("file", file);
-
-                fetch("/upload-profile-picture", {
-                    method: "POST",
-                    body: formData,
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.message === "Profile picture uploaded successfully") {
-                        document.getElementById('profileImage').src = data.profile_picture_url;
-                    } else {
-                        alert("Profile picture upload failed: " + data.message);
-                    }
-                })
-                .catch(() => {
-                    alert("Error during profile picture upload");
-                });
-            }
-        }
-
-        // Logout Function
-        function logout() {
-            fetch("/logout", { method: "POST" })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.success) {
-                        window.location.href = "/login";
-                    } else {
-                        alert("Logout failed");
-                    }
-                })
-                .catch((error) => {
-                    alert("Logout failed");
-                });
-        }
+        
     </script>
 </body>

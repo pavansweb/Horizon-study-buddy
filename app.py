@@ -383,23 +383,6 @@ def admin():
                            message_count=message_count)
 
 
-@app.route('/view-users', methods=['GET'])
-@role_required([Role.ADMIN0, Role.ADMIN1])
-def view_users():
-    user = db.session.get(User, session['user_id'])
-
-    users = User.query.all()
-    users_data = [
-        {
-            'email': user.email,
-            'role': user.role.value,
-            'joined': user.created_at.strftime('%Y-%m-%d'),
-            'password_hash': user.password_hash  # Include hashed password
-        } for user in users
-    ]
-    return jsonify(users_data)
-    return jsonify({'message': 'Unauthorized'}), 403
-
 
 @app.route('/manage-users', methods=['GET'])
 @role_required([Role.ADMIN0, Role.ADMIN1, Role.ADMIN2])

@@ -1,37 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Study App</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/contact.css">
-    
+    <title>Contact Us - Study Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-color: #0a0a1a;
+            --secondary-color: #ff00ff;
+            --background-light: #0a0a1a;
+            --background-dark: #e5ebee;
+            --text-primary: #00ffff;
+            --text-secondary: #ff00ff
+            
+            /* Spacing */
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            
+            /* Transitions */
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
+        }
+
+        .contact-container {
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            background: white;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .contact-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .form-input {
+            transition: all var(--transition-speed) ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74,144,226,0.1);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: all 0.4s ease;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(50,50,93,0.1), 0 3px 6px rgba(0,0,0,0.08);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: linear-gradient(to right, #a0c4f0, #a0e2b4);
+        }
+    </style>
 </head>
+<body class="min-h-screen flex items-center justify-center p-6">
+    <div class="contact-container w-full p-8 md:p-12 rounded-xl">
+        <a href='/' style=" text-decoration: underline ">Back Home</a>
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Connect with Us</h1>
+            <p class="text-gray-500 text-sm md:text-base">We'd love to hear from you. Fill out the form below.</p>
+            
+        </div>
+        
+        <form id="contactForm" class="space-y-6" method="post" action="{{ url_for('contact') }}">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label for="input-name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <input 
+                        type="text" 
+                        id="input-name" 
+                        name="name" 
+                        required 
+                        class="form-input w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-200"
+                        placeholder="Your Full Name"
+                    >
+                </div>
+                <div>
+                    <label for="input-email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input 
+                        type="email" 
+                        id="input-email" 
+                        name="email" 
+                        required 
+                        class="form-input w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-200"
+                        placeholder="your.email@example.com"
+                    >
+                </div>
+            </div>
 
-<body>
-    <div class="container">
-        <header class="text-center mb-4">
-            <h1 class="page-title">Get in Touch</h1>
-        </header>
-        <form class="contact-form" method="post" action="{{ url_for('contact') }}">
-            <div class="form-group">
-                <input type="text" id="input-name" name="name" class="form-control" placeholder="Name" required>
+            <div>
+                <label for="input-subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                <input 
+                    type="text" 
+                    id="input-subject" 
+                    name="subject" 
+                    required 
+                    class="form-input w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-200"
+                    placeholder="Purpose of your message"
+                >
             </div>
-            <div class="form-group">
-                <input type="email" id="input-email" name="email" class="form-control" placeholder="Email address" required>
+
+            <div>
+                <label for="input-message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <textarea 
+                    id="input-message" 
+                    name="message" 
+                    rows="5" 
+                    required 
+                    class="form-input w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-200"
+                    placeholder="Type your message here..."
+                ></textarea>
             </div>
-            <div class="form-group">
-                <input type="text" id="input-subject" name="subject" class="form-control" placeholder="Subject" required>
-            </div> 
-            <div class="form-group"> 
-               <textarea name="message" id="input-message" class="form-control" placeholder="Message" rows="5" required></textarea>
+
+            <div class="text-center">
+                <button 
+                    id="submitButton"
+                    type="submit" 
+                    class="submit-btn w-full md:w-auto px-8 py-3 text-white font-semibold rounded-full shadow-md hover:shadow-lg"
+                >
+                    Send Message
+                </button>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
-    </div>
-</body>
 
+        <div class="mt-6 text-center text-gray-500 text-xs">
+            We typically respond within 24-48 hours.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const submitButton = document.getElementById('submitButton');
+            let isSubmitting = false;
+
+            form.addEventListener('submit', function(e) {
+                // Prevent multiple submissions
+                if (isSubmitting) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Validate all inputs
+                const inputs = form.querySelectorAll('input, textarea');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('border-red-500');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                // If not valid, prevent submission
+                if (!isValid) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Disable button and set submission flag
+                isSubmitting = true;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                // Optional: Reset button after 5 seconds in case of network error
+                setTimeout(() => {
+                    if (isSubmitting) {
+                        isSubmitting = false;
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                    }
+                }, 5000);
+            });
+
+            // Remove error styling when user starts typing
+            form.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('border-red-500');
+                });
+            });
+        });
+    </script>
+</body>
 </html>

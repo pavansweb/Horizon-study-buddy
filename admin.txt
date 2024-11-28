@@ -1,4 +1,4 @@
-% first flask shell 
+# first flask shell 
 from app import db
 from app import User, Role
 
